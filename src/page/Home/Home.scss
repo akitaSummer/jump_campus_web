@@ -1,0 +1,329 @@
+.logo {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.loadEffect {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.loadEffect span {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: lightgreen;
+    position: absolute;
+    -webkit-animation: load 1.04s ease infinite;
+}
+
+.loading {
+    width: 80px;
+    height: 40px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.loading span {
+    display: inline-block;
+    width: 8px;
+    height: 100%;
+    border-radius: 4px;
+    background: lightgreen;
+    -webkit-animation: load 1s ease infinite;
+}
+
+@-webkit-keyframes load {
+    0%,
+    100% {
+        height: 40px;
+        background: lightgreen;
+    }
+    50% {
+        height: 70px;
+        margin: -15px 0;
+        background: lightblue;
+    }
+}
+
+.loading span:nth-child(2) {
+    -webkit-animation-delay: 0.2s;
+}
+
+.loading span:nth-child(3) {
+    -webkit-animation-delay: 0.4s;
+}
+
+.loading span:nth-child(4) {
+    -webkit-animation-delay: 0.6s;
+}
+
+.loading span:nth-child(5) {
+    -webkit-animation-delay: 0.8s;
+}
+
+.site-navigation {
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.word {
+    z-index: 0;
+    opacity: 1;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    transform-style: preserve-3d;
+}
+
+.title {
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    text-align: center;
+    .scene {
+        z-index: -100;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+    }
+}
+
+.line {
+    visibility: inherit;
+    opacity: 1;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    transform-style: preserve-3d;
+    margin: 16px auto;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s linear;
+    &.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sub-text {
+    max-width: 540px;
+    padding: 0 10px;
+    margin: 16px auto;
+    text-align: center;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s linear;
+    &.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.search {
+    max-width: 540px;
+    padding: 0 10px;
+    margin: 16px auto;
+    opacity: 0;
+    transition: all 0.5s linear;
+    &.show {
+        opacity: 1;
+    }
+    .search-input {
+        width: 100%;
+        display: flex;
+        .standard-full-width {
+            flex: 1;
+        }
+    }
+}
+
+.footer {
+    max-width: 540px;
+    padding: 0 10px;
+    margin: 16px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.5s linear;
+    &.show {
+        opacity: 1;
+    }
+    .MuiTablePagination-root {
+        border: none;
+    }
+}
+
+.detail {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    align-items: start;
+    width: 100%;
+    margin: 10px 20px;
+    opacity: 0;
+    transition: all 0.5s linear;
+    &.show {
+        opacity: 1;
+    }
+}
+
+.card {
+    min-width: 275px;
+    width: 30%;
+    transition: all .2s;
+    margin: 10px 1%;
+    border-color: #e5eaf4!important;
+    border: .0625rem solid rgba(23, 31, 56, .125);
+    cursor: pointer;
+    .bullet {
+        display: inline-block;
+        margin: 0 2px;
+        transform: scale(0.8);
+    }
+    .card-title {
+        font-size: 18px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        &.skeletonBg {
+            width: 100%;
+            height: 27px;
+        }
+    }
+    .pos {
+        margin: 22px 0;
+        display: flex;
+        justify-content: space-between;
+        .iconfont {
+            font-size: 14px;
+        }
+        &.skeletonBg {
+            width: 100%;
+            height: 16px;
+        }
+    }
+    .card-detail {
+        &.skeletonBg {
+            width: 100%;
+            height: 20px;
+        }
+    }
+    &:active {
+        background-color: rgba(153, 153, 153, 0.2);
+    }
+}
+
+@media screen and (min-width: 300px) {
+    body {
+        .detail {
+            margin: 10px 0;
+        }
+        .card {
+            min-width: 275px;
+            width: 90%;
+            margin: 10px 5%;
+            transition: all .2s;
+        }
+    }
+}
+
+
+/* iphoneX */
+
+@media screen and (min-width: 375px) and (-webkit-device-pixel-ratio: 3) {
+    body {
+        .detail {
+            margin: 10px 0;
+        }
+        .card {
+            min-width: 275px;
+            width: 90%;
+            margin: 10px 5%;
+            transition: all .2s;
+        }
+    }
+}
+
+
+/* iphone6 7 8 plus */
+
+@media screen and (min-width: 414px) {
+    body {
+        .detail {
+            margin: 10px 0;
+        }
+        .card {
+            min-width: 275px;
+            width: 90%;
+            margin: 10px 5%;
+            transition: all .2s;
+        }
+    }
+}
+
+
+/* ipad */
+
+@media screen and (min-width: 768px) {
+    body {
+        .detail {
+            margin: 10px 0;
+            padding-left: 10px;
+            width: calc(100% - 10px);
+        }
+        .card {
+            min-width: 275px;
+            width: 45%;
+            margin: 10px 2%;
+            transition: all .2s;
+        }
+    }
+}
+
+
+/* ipad pro */
+
+@media screen and (min-width: 1024px) {
+    body {
+        .detail {
+            box-sizing: border-box;
+            margin: 10px 0;
+            padding-left: 30px;
+            width: calc(100% - 30px);
+        }
+        .card {
+            min-width: 275px;
+            width: 30%;
+            margin: 10px 1%;
+            transition: all .2s;
+        }
+    }
+}
+
+
+/* pc */
+
+@media screen and (min-width: 1100px) {
+    body {
+        max-width: 1100px;
+        margin: auto;
+        .card {
+            min-width: 275px;
+            width: 30%;
+            margin: 10px 1%;
+            &:hover {
+                top: -5px;
+                -webkit-box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2);
+            }
+            &:active {
+                background-color: transparent;
+            }
+        }
+    }
+}

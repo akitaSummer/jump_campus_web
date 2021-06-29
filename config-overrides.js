@@ -5,11 +5,28 @@ const {
     // addWebpackPlugin,
     // addWebpackModuleRule,
     disableEsLint,
+    overrideDevServer
 } = require("customize-cra");
 
-module.exports = (config, env) => {
-    const prod = config.mode === "production";
-    return override(
+const devServerConfig = () => config => {
+    return {
+        ...config,
+        port: 3000,
+        proxy: {
+            '/rec': {
+                target: 'https://doudou0.online/',
+                changeOrigin: true,
+            },
+        },
+    }
+}
+
+module.exports = {
+    webpack: override(
         disableEsLint()
-    )(config, env);
-};
+    ),
+    devServer: overrideDevServer(
+        // dev server plugin
+        devServerConfig()
+    )
+}

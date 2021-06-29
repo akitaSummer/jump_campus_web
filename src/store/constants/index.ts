@@ -1,0 +1,4 @@
+export const UPDATEPAGELOADING = "UPDATEPAGELOADING";
+export const GETJOBLIST = "GETJOBLIST";
+export const GETJOBDETAIL = "GETJOBDETAIL";
+export const ERROR = "ERROR";

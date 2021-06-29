@@ -1,0 +1,159 @@
+.router-wrapper {
+    overflow: hidden;
+}
+
+
+/**
+   * 右侧淡入，右侧淡出
+   */
+
+.forward-from-right-enter {
+    z-index: 2;
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.forward-from-right-enter-active {
+    z-index: 2;
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 500ms;
+}
+
+.forward-from-right-exit {
+    z-index: 1;
+    opacity: 1;
+}
+
+.forward-from-right-exit-active {
+    z-index: 1;
+    opacity: .3;
+    transition: all 500ms;
+}
+
+.back-to-right-enter {
+    z-index: 1;
+    opacity: .3;
+}
+
+.back-to-right-enter-active {
+    z-index: 1;
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 500ms;
+}
+
+.back-to-right-exit {
+    z-index: 2;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.back-to-right-exit-active {
+    z-index: 2;
+    opacity: 0;
+    transform: translate(100%);
+    transition: all 500ms;
+}
+
+
+/**
+   * 下方淡入，下方淡出
+   */
+
+.forward-from-bottom-enter {
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+.forward-from-bottom-enter-active {
+    z-index: 2;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 500ms;
+}
+
+.forward-from-bottom-exit {
+    z-index: 1;
+    opacity: 1;
+}
+
+.forward-from-bottom-exit-active {
+    z-index: 1;
+    opacity: .3;
+    transition: all 500ms;
+}
+
+.back-to-bottom-enter {
+    z-index: 1;
+    opacity: .3;
+}
+
+.back-to-bottom-enter-active {
+    z-index: 1;
+    opacity: 1;
+    transition: all 500ms;
+}
+
+.back-to-bottom-exit {
+    z-index: 2;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.back-to-bottom-exit-active {
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 500ms;
+}
+
+
+/**
+   * 淡入，淡出
+   */
+
+.forward-from-enter {
+    z-index: 2000 !important;
+    opacity: 0;
+}
+
+.forward-from-enter-active {
+    z-index: 2000 !important;
+    opacity: 1;
+    transition: all 500ms;
+}
+
+.forward-from-exit {
+    z-index: -1000 !important;
+    opacity: 1;
+}
+
+.forward-from-exit-active {
+    z-index: -1000 !important;
+    opacity: .3;
+    transition: all 500ms;
+}
+
+.back-to-enter {
+    z-index: -1000 !important;
+    opacity: .3;
+}
+
+.back-to-enter-active {
+    z-index: -1000 !important;
+    opacity: 1;
+    transition: all 500ms;
+}
+
+.back-to-exit {
+    z-index: 2000 !important;
+    opacity: 1;
+}
+
+.back-to-exit-active {
+    z-index: 2000 !important;
+    opacity: 0;
+    transition: all 500ms;
+}

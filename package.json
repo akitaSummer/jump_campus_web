@@ -4,19 +4,33 @@
     "private": true,
     "dependencies": {
         "@material-ui/core": "^4.11.4",
+        "@material-ui/icons": "^4.11.2",
+        "@material-ui/lab": "^4.0.0-alpha.58",
         "@testing-library/jest-dom": "^5.11.4",
         "@testing-library/react": "^11.1.0",
         "@testing-library/user-event": "^12.1.10",
+        "@types/clipboard": "^2.0.7",
         "@types/jest": "^26.0.15",
         "@types/node": "^12.0.0",
         "@types/react": "^17.0.0",
         "@types/react-dom": "^17.0.0",
+        "@types/react-redux": "^7.1.16",
+        "@types/react-router": "^5.1.15",
+        "@types/react-router-dom": "^5.1.7",
+        "axios": "^0.21.1",
         "classnames": "^2.3.1",
+        "clipboard": "^2.0.8",
+        "qrcode.react": "^1.0.1",
         "react": "^17.0.2",
         "react-app-rewired": "^2.1.8",
         "react-dom": "^17.0.2",
+        "react-redux": "^7.2.4",
+        "react-router": "^5.2.0",
+        "react-router-dom": "^5.2.0",
         "react-scripts": "4.0.3",
-        "react-transition-group": "4.4.2",
+        "react-transition-group": "^4.4.2",
+        "redux": "^4.1.0",
+        "redux-thunk": "^2.3.0",
         "sass-loader": "^12.1.0",
         "typescript": "^4.1.2",
         "web-vitals": "^1.0.1"
@@ -46,7 +60,11 @@
         ]
     },
     "devDependencies": {
+        "@types/qrcode.react": "^1.0.1",
+        "@types/redux": "^3.6.0",
+        "@types/redux-thunk": "^2.1.0",
         "customize-cra": "^1.0.0",
+        "http-proxy-middleware": "^2.0.0",
         "node-sass": "^6.0.1"
     }
 }
