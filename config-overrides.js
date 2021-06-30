@@ -5,6 +5,7 @@ const {
     // addWebpackPlugin,
     // addWebpackModuleRule,
     disableEsLint,
+    setWebpackPublicPath,
     overrideDevServer
 } = require("customize-cra");
 
@@ -22,9 +23,13 @@ const devServerConfig = () => config => {
 }
 
 module.exports = {
-    webpack: override(
-        disableEsLint()
-    ),
+    webpack: (config, env) => {
+        const prod = config.mode === "production";
+        return override(
+            disableEsLint(),
+            prod && setWebpackPublicPath('/school')
+        )(config, env)
+    },
     devServer: overrideDevServer(
         // dev server plugin
         devServerConfig()

@@ -30,18 +30,17 @@ function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
 }
 
-const debounce = (func: any, delay: number) => {
+const debounce = (() => {
   let timeout: any;
-  return () => {
+  return (func: any, delay: number) => {
     if (timeout) {
       clearTimeout(timeout);
     }
-    console.log(123);
     timeout = setTimeout(function () {
       func();
     }, delay);
   };
-};
+})();
 
 const Home = () => {
   const history = useHistory();
@@ -63,7 +62,7 @@ const Home = () => {
     dispatch(updateJobList(null));
     debounce(() => {
       dispatch(asyncGetJobList(pageNumber, 9, search || ""));
-    }, 200)();
+    }, 200);
   };
 
   useEffect(() => {
