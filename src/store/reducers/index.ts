@@ -4,6 +4,8 @@ import {
   ERROR,
   GETJOBLIST,
   GETJOBDETAIL,
+  GETCITYLIST,
+  GETCATEGORYLIST,
 } from "../constants";
 
 export type IntroduceJobType = {
@@ -13,6 +15,8 @@ export type IntroduceJobType = {
   job_description: string;
   job_requirement: string;
   job_category_name: string;
+  company: string;
+  short_url: string;
 };
 
 export type JobListType = {
@@ -29,6 +33,8 @@ export type RootStateType = {
   errMsg: string;
   jobList: JobListType | null;
   jobDetail: IntroduceJobType | null;
+  citys: string[];
+  category: string[];
 };
 
 const ROOT_INITIAL_STATE: RootStateType = {
@@ -37,6 +43,8 @@ const ROOT_INITIAL_STATE: RootStateType = {
   jobList: null,
   errMsg: "",
   jobDetail: null,
+  citys: [],
+  category: [],
 };
 
 const root = (
@@ -61,6 +69,18 @@ const root = (
         ...state,
         actionType: actions.type,
         jobDetail: actions.data,
+      };
+    case GETCATEGORYLIST:
+      return {
+        ...state,
+        actionType: actions.type,
+        category: actions.data,
+      };
+    case GETCITYLIST:
+      return {
+        ...state,
+        actionType: actions.type,
+        citys: actions.data,
       };
     case ERROR:
       return {

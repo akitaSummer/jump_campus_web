@@ -21,6 +21,7 @@ import {
   updateJobDetail,
 } from "../../store";
 import { RoomTwoTone } from "@material-ui/icons";
+import { getJobList } from "../../api";
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -85,7 +86,13 @@ const Detail = () => {
       <div className='topnavAndBanner'></div>
       <header className='App-header'>
         <div className='site-navigation'>
-          <Link to='/' className='logo float-left m-0'>
+          <Link
+            to={
+              root.jobDetail?.company
+                ? `/?company=${root.jobDetail.company}`
+                : "/"
+            }
+            className='logo float-left m-0'>
             <IconButton component='span'>
               <ArrowBackIcon style={{ fontSize: 40 }} />
             </IconButton>
@@ -214,10 +221,10 @@ const Detail = () => {
                 2022届
               </span>
               <span className={classnames("iconfont", "icon-school")}>
-                杭州
+                {root.jobDetail.job_work_place_name[0]}
               </span>
             </h1>
-            <span className='hero-heading'>公司：netease</span>
+            <span className='hero-heading'>公司：{root.jobDetail.company}</span>
             <img src={scene} className='scene' alt='logo' />
           </div>
           <div className={classnames("detail-content")}>
@@ -235,16 +242,14 @@ const Detail = () => {
               variant='outlined'
               color='primary'
               onClick={() => {
-                window.open(
-                  `https://new.hi.163.com/leihuoneitui/?#/?introduce_id=gruibfhpufrxx2io&&id_token=41ae35de511bde9acc2189e39b5e0d6e&&project_id=1000000358&&job_introduce_id=${root.jobDetail?.id}`
-                );
+                root.jobDetail && window.open(root.jobDetail.short_url);
               }}>
               点我投递
             </Button>
             <div className={"detail-code"}>
               <QRCode
                 className={"detail-qrcode"}
-                value={`https://new.hi.163.com/leihuoneitui/?#/?introduce_id=gruibfhpufrxx2io&&id_token=41ae35de511bde9acc2189e39b5e0d6e&&project_id=1000000358&&job_introduce_id=${root.jobDetail?.id}`}
+                value={root.jobDetail.short_url}
               />
               <span className='hero-heading'>扫码投递</span>
             </div>

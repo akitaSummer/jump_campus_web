@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
@@ -20,11 +24,20 @@ import {
   StoreType,
   RootStateType,
   updatePageLoading,
+  asyncGetCategoryList,
+  asyncGetCityList,
   asyncGetJobList,
   updateJobList,
   ERROR,
   GETJOBLIST,
 } from "../../store";
+import { AnyCnameRecord } from "dns";
+
+enum CompanyEunm {
+  ALL = "all",
+  NETEASE = "netease",
+  BYTEDANCE = "bytedance",
+}
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -44,8 +57,12 @@ const debounce = (() => {
 
 const Home = () => {
   const history = useHistory();
+  const location = useLocation();
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
+  const [selectValue, setSelectValue] = useState("全部");
+  const [cityValue, setCityValue] = useState("全部");
+  const [page, setPage] = useState(1);
   const [open, setOpen] = useState(false);
   const root = useSelector<StoreType, RootStateType>((state) => state.root);
 
@@ -57,11 +74,30 @@ const Home = () => {
     setOpen(false);
   };
 
+  const query = location.search
+    .slice(1)
+    .split("&")
+    .reduce<any>((prev, item) => {
+      const [key, value] = item.split("=");
+      prev[key as string] = value as string;
+      return prev;
+    }, {});
+
   const getlist = (pageNumber: number, search?: string) => {
     setSearchValue(search || "");
     dispatch(updateJobList(null));
+    setPage(pageNumber);
     debounce(() => {
-      dispatch(asyncGetJobList(pageNumber, 9, search || ""));
+      dispatch(
+        asyncGetJobList(
+          pageNumber,
+          9,
+          query.company || "netease",
+          search || "",
+          selectValue,
+          cityValue
+        )
+      );
     }, 200);
   };
 
@@ -73,10 +109,29 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    dispatch(updateJobList(null));
+    dispatch(
+      asyncGetJobList(
+        1,
+        9,
+        query.company || "netease",
+        searchValue || "",
+        selectValue,
+        cityValue
+      )
+    );
+  }, [selectValue, cityValue]);
+
+  useEffect(() => {
     if (root.actionType === ERROR && root.errMsg === GETJOBLIST) {
       setOpen(true);
     }
   }, [root]);
+
+  useEffect(() => {
+    dispatch(asyncGetCategoryList(query.company || "netease"));
+    dispatch(asyncGetCityList(query.company || "netease"));
+  }, []);
 
   return (
     <>
@@ -124,6 +179,42 @@ const Home = () => {
               getlist(1, e.target.value);
             }}
           />
+          <FormControl className={"companySelect"}>
+            <InputLabel id='demo-simple-select-label'>分类</InputLabel>
+            <Select
+              labelId='demo-simple-select-label'
+              id='demo-simple-select'
+              value={selectValue}
+              onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
+                setSelectValue(event.target.value as CompanyEunm);
+              }}>
+              <MenuItem value={"全部"}>全部</MenuItem>
+              {root.category &&
+                root.category.map((item, i) => (
+                  <MenuItem key={i} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+          <FormControl className={"companySelect"}>
+            <InputLabel id='demo-simple-select-label'>工作地点</InputLabel>
+            <Select
+              labelId='demo-simple-select-label'
+              id='demo-simple-select'
+              value={cityValue}
+              onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
+                setCityValue(event.target.value as CompanyEunm);
+              }}>
+              <MenuItem value={"全部"}>全部</MenuItem>
+              {root.citys &&
+                root.citys.map((item, i) => (
+                  <MenuItem key={i} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
         </div>
       </div>
       <div
@@ -189,11 +280,11 @@ const Home = () => {
                       2022届
                     </span>
                     <span className={classnames("iconfont", "icon-school")}>
-                      杭州
+                      {item.job_work_place_name[0]}
                     </span>
                   </Typography>
                   <Typography variant='body2' component='p'>
-                    公司：netease
+                    公司：{query.company || "netease"}
                   </Typography>
                 </CardContent>
                 {/* <CardActions>
